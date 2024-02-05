@@ -3,20 +3,25 @@ import path from "path";
 import { payloadCloud } from "@payloadcms/plugin-cloud";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
+import { viteBundler } from "@payloadcms/bundler-vite";
 import { slateEditor } from "@payloadcms/richtext-slate";
+
 import { buildConfig } from "payload/config";
 
 import Users from "./collections/Users";
 import { Pages } from "./collections/Pages";
 import { Media } from "./collections/Media";
+import { Header } from "./globals/Header";
 
 export default buildConfig({
   admin: {
     user: Users.slug,
-    bundler: webpackBundler(),
+    // bundler: webpackBundler(),
+    bundler: viteBundler(),
   },
   editor: slateEditor({}),
   collections: [Users, Pages, Media],
+  globals: [Header],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
