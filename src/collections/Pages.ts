@@ -1,6 +1,7 @@
 import { CollectionConfig } from "payload/types";
 import { Hero } from "../blocks/Hero";
 import { TwoColumn } from "../blocks/TwoColumn";
+import { slugField } from "../fields/slugField";
 
 export const Pages: CollectionConfig = {
   slug: "pages",
@@ -11,6 +12,10 @@ export const Pages: CollectionConfig = {
   access: {
     read: () => true,
   },
+  admin: {
+    defaultColumns: ["title", "slug", "updatedAt"],
+    useAsTitle: "name",
+  },
   fields: [
     {
       name: "name",
@@ -18,17 +23,22 @@ export const Pages: CollectionConfig = {
       type: "text",
       required: true,
     },
+    slugField("name"),
     {
-      name: "slug",
-      label: "Slug",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "layout",
-      label: "Layout",
-      type: "blocks",
-      blocks: [Hero, TwoColumn],
+      type: "tabs",
+      tabs: [
+        {
+          label: "Content",
+          fields: [
+            {
+              name: "layout",
+              label: "Layout",
+              type: "blocks",
+              blocks: [Hero, TwoColumn],
+            },
+          ],
+        },
+      ],
     },
   ],
 };

@@ -12,10 +12,5 @@ export const Hero: Block = {
       label: "Heading",
       type: "text",
     },
-    {
-      name: "text",
-      label: "Text",
-      type: "textarea",
-    },
   ],
 };
