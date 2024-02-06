@@ -1,6 +1,7 @@
 import { CollectionConfig } from "payload/types";
 import { Hero } from "../blocks/Hero";
 import { TwoColumn } from "../blocks/TwoColumn";
+import { YouTubeEmbed } from "../blocks/YouTubeEmbed";
 import { slugField } from "../fields/slugField";
 
 export const Pages: CollectionConfig = {
@@ -13,7 +14,7 @@ export const Pages: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    defaultColumns: ["title", "slug", "updatedAt"],
+    defaultColumns: ["name", "slug", "updatedAt"],
     useAsTitle: "name",
   },
   fields: [
@@ -34,7 +35,7 @@ export const Pages: CollectionConfig = {
               name: "layout",
               label: "Layout",
               type: "blocks",
-              blocks: [Hero, TwoColumn],
+              blocks: [Hero, TwoColumn, YouTubeEmbed],
             },
           ],
         },
