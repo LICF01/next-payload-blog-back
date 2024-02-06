@@ -22,7 +22,6 @@ export const Posts: CollectionConfig = {
       required: true,
       type: "text",
     },
-    slugField("title"),
     {
       name: "publishedDate",
       admin: {
@@ -31,20 +30,13 @@ export const Posts: CollectionConfig = {
       type: "date",
     },
     {
-      type: "tabs",
-      tabs: [
-        {
-          label: "Content",
-          fields: [
-            {
-              name: "layout",
-              blocks: [YouTubeEmbed, RichText],
-              required: true,
-              type: "blocks",
-            },
-          ],
-        },
-      ],
+      name: "categories",
+      admin: {
+        position: "sidebar",
+      },
+      hasMany: true,
+      relationTo: "categories",
+      type: "relationship",
     },
     {
       name: "relatedPosts",
@@ -61,6 +53,23 @@ export const Posts: CollectionConfig = {
       hasMany: true,
       relationTo: "posts",
       type: "relationship",
+    },
+    slugField("title"),
+    {
+      type: "tabs",
+      tabs: [
+        {
+          label: "Content",
+          fields: [
+            {
+              name: "layout",
+              blocks: [YouTubeEmbed, RichText],
+              required: true,
+              type: "blocks",
+            },
+          ],
+        },
+      ],
     },
   ],
 };

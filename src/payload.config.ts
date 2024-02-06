@@ -13,6 +13,7 @@ import { Pages } from "./collections/Pages";
 import { Media } from "./collections/Media";
 import { Header } from "./globals/Header";
 import { Posts } from "./collections/Posts";
+import Categories from "./collections/Categories";
 
 export default buildConfig({
   admin: {
@@ -21,7 +22,7 @@ export default buildConfig({
     bundler: viteBundler(),
   },
   editor: lexicalEditor({}),
-  collections: [Users, Pages, Media, Posts],
+  collections: [Users, Pages, Media, Posts, Categories],
   globals: [Header],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
