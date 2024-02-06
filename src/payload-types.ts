@@ -52,6 +52,13 @@ export interface Page {
             blockName?: string | null;
             blockType: 'twoColumn';
           }
+        | {
+            id: string | null;
+            title: string;
+            description?: string | null;
+            blockName?: string | null;
+            blockType: 'youTubeEmbed';
+          }
       )[]
     | null;
   updatedAt: string;

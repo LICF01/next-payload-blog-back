@@ -4,7 +4,7 @@ import { payloadCloud } from "@payloadcms/plugin-cloud";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { viteBundler } from "@payloadcms/bundler-vite";
-import { slateEditor } from "@payloadcms/richtext-slate";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 
 import { buildConfig } from "payload/config";
 
@@ -12,6 +12,7 @@ import Users from "./collections/Users";
 import { Pages } from "./collections/Pages";
 import { Media } from "./collections/Media";
 import { Header } from "./globals/Header";
+import { Posts } from "./collections/Posts";
 
 export default buildConfig({
   admin: {
@@ -19,8 +20,8 @@ export default buildConfig({
     // bundler: webpackBundler(),
     bundler: viteBundler(),
   },
-  editor: slateEditor({}),
-  collections: [Users, Pages, Media],
+  editor: lexicalEditor({}),
+  collections: [Users, Pages, Media, Posts],
   globals: [Header],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
