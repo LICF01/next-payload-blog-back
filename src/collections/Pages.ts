@@ -1,4 +1,6 @@
 import { CollectionConfig } from "payload/types";
+import { Collection } from "../blocks/Collection";
+import { ExternalImage } from "../blocks/ExternalImage";
 import { Hero } from "../blocks/Hero";
 import { TwoColumn } from "../blocks/TwoColumn";
 import { YouTubeEmbed } from "../blocks/YouTubeEmbed";
@@ -35,7 +37,13 @@ export const Pages: CollectionConfig = {
               name: "layout",
               label: "Layout",
               type: "blocks",
-              blocks: [Hero, TwoColumn, YouTubeEmbed],
+              blocks: [
+                Hero,
+                TwoColumn,
+                YouTubeEmbed,
+                Collection,
+                ExternalImage,
+              ],
             },
           ],
         },
