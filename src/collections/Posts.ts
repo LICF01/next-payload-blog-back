@@ -40,12 +40,14 @@ export const Posts: CollectionConfig = {
         position: "sidebar",
       },
       type: "date",
+      required: true,
     },
     {
       name: "categories",
       admin: {
         position: "sidebar",
       },
+      required: true,
       hasMany: true,
       relationTo: "categories",
       type: "relationship",
