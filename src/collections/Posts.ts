@@ -20,15 +20,6 @@ export const Posts: CollectionConfig = {
   },
   fields: [
     {
-      name: "cover",
-      label: "Cover Image",
-      type: "select",
-      options: [
-        { label: "External Image", value: "image" },
-        { label: "Upload", value: "upload" },
-      ],
-    },
-    {
       name: "title",
       required: true,
       type: "text",
