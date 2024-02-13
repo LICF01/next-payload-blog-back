@@ -21,8 +21,14 @@ export const Pages: CollectionConfig = {
   },
   fields: [
     {
-      name: "name",
-      label: "Name",
+      name: "title",
+      label: "Title",
+      type: "text",
+      required: true,
+    },
+    {
+      name: "description",
+      label: "Description",
       type: "text",
       required: true,
     },

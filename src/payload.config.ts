@@ -5,6 +5,7 @@ import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { viteBundler } from "@payloadcms/bundler-vite";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import seoPlugin from "@payloadcms/plugin-seo";
 
 import { buildConfig } from "payload/config";
 
@@ -30,7 +31,14 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
-  plugins: [],
+  plugins: [
+    seoPlugin({
+      collections: ["pages", "posts"],
+      uploadsCollection: "media",
+      generateTitle: ({ doc }) => doc.title.value,
+      generateDescription: ({ doc }) => doc.description.value,
+    }),
+  ],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,
   }),

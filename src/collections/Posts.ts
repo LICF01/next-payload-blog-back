@@ -21,10 +21,16 @@ export const Posts: CollectionConfig = {
   fields: [
     {
       name: "title",
+      label: "Title",
       required: true,
       type: "text",
     },
-
+    {
+      name: "description",
+      label: "Description",
+      required: true,
+      type: "text",
+    },
     {
       name: "publishedDate",
       admin: {
