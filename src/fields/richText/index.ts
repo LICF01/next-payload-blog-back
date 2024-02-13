@@ -29,49 +29,6 @@ const richText: RichText = (
       editor: lexicalEditor({
         features: () => [
           ...[...defaultPublicDemoFeatures, ...(additions.features || [])],
-          UploadFeature({
-            collections: {
-              media: {
-                fields: [
-                  {
-                    name: "caption",
-                    editor: lexicalEditor({
-                      features: () => [
-                        ParagraphFeature(),
-                        ...defaultPublicDemoFeatures,
-                      ],
-                    }),
-                    label: "Caption",
-                    type: "richText",
-                  },
-                  {
-                    name: "alignment",
-                    label: "Alignment",
-                    options: [
-                      {
-                        label: "Left",
-                        value: "left",
-                      },
-                      {
-                        label: "Center",
-                        value: "center",
-                      },
-                      {
-                        label: "Right",
-                        value: "right",
-                      },
-                    ],
-                    type: "radio",
-                  },
-                  {
-                    name: "enableLink",
-                    label: "Enable Link",
-                    type: "checkbox",
-                  },
-                ],
-              },
-            },
-          }),
         ],
       }),
       required: true,

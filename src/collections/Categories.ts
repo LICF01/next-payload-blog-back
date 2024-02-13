@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload/types";
+import { slugField } from "../fields/slugField";
 
 const Categories: CollectionConfig = {
   access: {
@@ -18,6 +19,7 @@ const Categories: CollectionConfig = {
       name: "description",
       type: "textarea",
     },
+    slugField("title"),
   ],
 };
 

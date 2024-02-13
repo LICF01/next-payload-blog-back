@@ -11,6 +11,8 @@ export interface Config {
     users: User;
     pages: Page;
     media: Media;
+    posts: Post;
+    categories: Category;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -59,6 +61,18 @@ export interface Page {
             blockName?: string | null;
             blockType: 'youTubeEmbed';
           }
+        | {
+            collection?: ('posts' | 'categories') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'collection';
+          }
+        | {
+            alt: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'externalImage';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -76,6 +90,66 @@ export interface Media {
   filesize?: number | null;
   width?: number | null;
   height?: number | null;
+}
+export interface Post {
+  id: string;
+  title: string;
+  publishedDate: string;
+  categories: (string | Category)[];
+  relatedPosts?: (string | Post)[] | null;
+  slug?: string | null;
+  coverImage: {
+    type?: ('external' | 'local') | null;
+    localImage?: string | Media | null;
+    url?: string | null;
+    alt?: string | null;
+  };
+  layout: (
+    | {
+        id: string | null;
+        title: string;
+        description?: string | null;
+        blockName?: string | null;
+        blockType: 'youTubeEmbed';
+      }
+    | {
+        richText: {
+          root: {
+            children: {
+              type: string;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            type: string;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'richText';
+      }
+    | {
+        alt: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'externalImage';
+      }
+  )[];
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+export interface Category {
+  id: string;
+  title?: string | null;
+  description?: string | null;
+  slug?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface PayloadPreference {
   id: string;
