@@ -35,6 +35,7 @@ export default buildConfig({
     seoPlugin({
       collections: ["pages", "posts"],
       uploadsCollection: "media",
+      tabbedUI: true,
       generateTitle: ({ doc }) => doc.title.value,
       generateDescription: ({ doc }) => doc.description.value,
     }),

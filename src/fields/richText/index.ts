@@ -1,4 +1,8 @@
-import type { FeatureProvider } from "@payloadcms/richtext-lexical";
+import {
+  defaultEditorFeatures,
+  FeatureProvider,
+  HeadingFeature,
+} from "@payloadcms/richtext-lexical";
 import type { RichTextField } from "payload/types";
 
 import {
@@ -7,28 +11,20 @@ import {
   lexicalEditor,
 } from "@payloadcms/richtext-lexical";
 
-import { defaultPublicDemoFeatures } from "./defaultFeatures";
 import deepMerge from "../../utilities/deepMerge";
 
-type RichText = (
-  overrides?: Partial<RichTextField>,
-  additions?: {
-    features?: FeatureProvider[];
-  }
-) => RichTextField;
+type RichText = (overrides?: Partial<RichTextField>) => RichTextField;
 
-const richText: RichText = (
-  overrides,
-  additions = {
-    features: [],
-  }
-) =>
+const richText: RichText = (overrides) =>
   deepMerge<RichTextField, Partial<RichTextField>>(
     {
       name: "richText",
       editor: lexicalEditor({
         features: () => [
-          ...[...defaultPublicDemoFeatures, ...(additions.features || [])],
+          ...defaultEditorFeatures,
+          HeadingFeature({
+            enabledHeadingSizes: ["h2", "h3", "h4", "h5", "h6"],
+          }),
         ],
       }),
       required: true,

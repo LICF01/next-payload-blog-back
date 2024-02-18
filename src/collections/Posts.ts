@@ -3,12 +3,12 @@ import { published } from "../access/published";
 import { ExternalImage } from "../blocks/ExternalImage";
 import { RichText } from "../blocks/RichText";
 import { YouTubeEmbed } from "../blocks/YouTubeEmbed";
-import Image from "../components/Image";
 import { slugField } from "../fields/slugField";
 
 export const Posts: CollectionConfig = {
   access: {
     read: published,
+    delete: () => true,
   },
   admin: {
     defaultColumns: ["title", "slug", "updatedAt"],
@@ -20,16 +20,38 @@ export const Posts: CollectionConfig = {
   },
   fields: [
     {
-      name: "title",
-      label: "Title",
-      required: true,
-      type: "text",
-    },
-    {
-      name: "description",
-      label: "Description",
-      required: true,
-      type: "text",
+      type: "tabs",
+      tabs: [
+        {
+          label: "Content",
+          fields: [
+            {
+              name: "title",
+              label: "Title",
+              required: true,
+              type: "text",
+            },
+            {
+              name: "description",
+              label: "Description",
+              required: true,
+              type: "text",
+            },
+            {
+              name: "coverImage",
+              label: "Cover Image",
+              type: "upload",
+              relationTo: "media",
+            },
+            {
+              name: "layout",
+              blocks: [YouTubeEmbed, RichText, ExternalImage],
+              required: true,
+              type: "blocks",
+            },
+          ],
+        },
+      ],
     },
     {
       name: "publishedDate",
@@ -66,96 +88,5 @@ export const Posts: CollectionConfig = {
       type: "relationship",
     },
     slugField("title"),
-    {
-      type: "tabs",
-      tabs: [
-        {
-          label: {
-            en: "Cover Image",
-            es: "Imagen de portada",
-          },
-          name: "coverImage",
-          fields: [
-            {
-              name: "type",
-              label: {
-                en: "Type",
-                es: "Tipo",
-              },
-              type: "radio",
-              options: [
-                {
-                  label: {
-                    en: "External link",
-                    es: "Enlace externo",
-                  },
-                  value: "external",
-                },
-                {
-                  label: {
-                    en: "local image | upload",
-                    es: "Imagen local | subir ",
-                  },
-                  value: "local",
-                },
-              ],
-              defaultValue: "external",
-              admin: {
-                layout: "horizontal",
-                width: "50%",
-              },
-            },
-            {
-              name: "localImage",
-              type: "upload",
-              relationTo: "media",
-              required: false,
-              admin: {
-                condition: (siblingData) => {
-                  if (!siblingData.coverImage) return;
-                  return siblingData.coverImage.type === "local";
-                },
-              },
-            },
-            {
-              name: "url",
-              label: "URL",
-              type: "text",
-              admin: {
-                components: {
-                  Field: Image,
-                },
-                condition: (siblingData) => {
-                  if (!siblingData.coverImage) return;
-                  return siblingData.coverImage.type === "external";
-                },
-              },
-            },
-            {
-              name: "alt",
-              type: "text",
-              required: true,
-              admin: {
-                condition: (siblingData) => {
-                  if (!siblingData.coverImage) return;
-                  return siblingData.coverImage.type === "external";
-                },
-              },
-            },
-          ],
-        },
-        {
-          label: "Content",
-          fields: [
-            {
-              name: "layout",
-              blocks: [YouTubeEmbed, RichText, ExternalImage],
-              required: true,
-              type: "blocks",
-            },
-          ],
-        },
-      ],
-    },
   ],
 };
