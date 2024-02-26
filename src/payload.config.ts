@@ -33,7 +33,7 @@ export default buildConfig({
   },
   plugins: [
     seoPlugin({
-      collections: ["pages", "posts"],
+      collections: ["pages", "posts", "categories"],
       uploadsCollection: "media",
       tabbedUI: true,
       generateTitle: ({ doc }) => doc.title.value,
