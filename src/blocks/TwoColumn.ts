@@ -8,20 +8,16 @@ export const TwoColumn: Block = {
   },
   fields: [
     {
-      name: "heading",
-      label: "Heading",
-      type: "text",
-    },
-    {
       name: "text",
       label: "Text",
-      type: "textarea",
+      type: "richText",
     },
     {
       name: "image",
       label: "Image",
       type: "upload",
       relationTo: "media",
+      required: true,
     },
     {
       name: "direction",
