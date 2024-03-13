@@ -15,6 +15,7 @@ import { Media } from "./collections/Media";
 import { Header } from "./globals/Header";
 import { Posts } from "./collections/Posts";
 import Categories from "./collections/Categories";
+import { Socials } from "./globals/Socials";
 
 export default buildConfig({
   admin: {
@@ -24,7 +25,7 @@ export default buildConfig({
   },
   editor: lexicalEditor({}),
   collections: [Users, Pages, Media, Posts, Categories],
-  globals: [Header],
+  globals: [Header, Socials],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },

@@ -18,6 +18,7 @@ export interface Config {
   };
   globals: {
     header: Header;
+    socials: Social;
   };
 }
 export interface User {
@@ -47,9 +48,22 @@ export interface Page {
             blockType: 'hero';
           }
         | {
-            heading?: string | null;
-            text?: string | null;
-            image?: string | Media | null;
+            text?: {
+              root: {
+                children: {
+                  type: string;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                type: string;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            image: string | Media;
             direction?: ('default' | 'reverse') | null;
             id?: string | null;
             blockName?: string | null;
@@ -192,6 +206,18 @@ export interface PayloadMigration {
 export interface Header {
   id: string;
   siteName: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+export interface Social {
+  id: string;
+  socialNetworks?:
+    | {
+        profileURL?: string | null;
+        shareTo?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
