@@ -16,6 +16,7 @@ import { Header } from "./globals/Header";
 import { Posts } from "./collections/Posts";
 import Categories from "./collections/Categories";
 import { Socials } from "./globals/Socials";
+import { GenerateTitle } from "@payloadcms/plugin-seo/dist/types";
 
 export default buildConfig({
   admin: {
@@ -37,8 +38,8 @@ export default buildConfig({
       collections: ["pages", "posts", "categories"],
       uploadsCollection: "media",
       tabbedUI: true,
-      generateTitle: ({ doc }) => doc.title.value,
-      generateDescription: ({ doc }) => doc.description.value,
+      generateTitle: ({ doc }: { doc: any }) => doc.title.value,
+      generateDescription: ({ doc }: { doc: any }) => doc.description.value,
     }),
   ],
   db: mongooseAdapter({
